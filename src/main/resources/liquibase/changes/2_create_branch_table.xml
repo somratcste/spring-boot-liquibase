@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="Create branch table" author="somratcste">
+        <createTable tableName="branch">
+            <column name="id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="name" type="varchar(40)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="employee_id" type="int">
+                <constraints nullable="false"
+                             foreignKeyName="fk_employee_id"
+                             references="employees(id)"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="branch"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

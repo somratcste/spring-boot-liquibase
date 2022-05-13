@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>info.somrat</groupId>
+	<artifactId>spring-boot-liquibase-sql-example</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>spring-boot-liquibase-sql-example</name>
+	<description>Spring Boot + Liquibase + SQL Example</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.5.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<liquibase.sql.url>jdbc:mariadb://localhost:3306/spring_boot_liquibase</liquibase.sql.url>
+		<liquibase.sql.username>root</liquibase.sql.username>
+		<liquibase.sql.password><!-- your password --></liquibase.sql.password>
+		<liquibase.sql.changelogfile>liquibase/changelog.xml</liquibase.sql.changelogfile>
+<!--		<liquibase.sql.driver>com.mysql.cj.jdbc.Driver</liquibase.sql.driver>-->
+		<!-- Liquibase -->
+		<liquibase.url>jdbc:mariadb://localhost:3306/spring_boot_liquibase</liquibase.url>
+		<liquibase.referenceUrl>jdbc:mariadb://localhost:3306/spring_boot_liquibase</liquibase.referenceUrl>
+		<liquibase.username>root</liquibase.username>
+		<liquibase.password><!-- your password --></liquibase.password>
+		<liquibase.outputChangeLogFile>src/main/resources/liquibase/changelog.xml</liquibase.outputChangeLogFile>
+		<liquibase.changeLogFile>liquibase/changelog.xml</liquibase.changeLogFile>
+		<liquibase.diffChangeLogFile>src/main/resources/liquibase/diff-changelog.xml</liquibase.diffChangeLogFile>
+<!--		<liquibase.driver>com.mysql.cj.jdbc.Driver</liquibase.driver>-->
+
+		<!-- Libraries -->
+		<liquibase.version>4.2.2</liquibase.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>2.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+  </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase.version}</version>
+				<configuration>
+					<outputChangeLogFile>${liquibase.outputChangeLogFile}</outputChangeLogFile>
+					<changeLogFile>${liquibase.changeLogFile}</changeLogFile>
+<!--					<driver>${liquibase.driver}</driver>-->
+					<url>${liquibase.url}</url>
+					<username>${liquibase.username}</username>
+					<password>${liquibase.password}</password>
+					<verbose>true</verbose>
+					<referenceUrl>${liquibase.referenceUrl}</referenceUrl>
+					<referenceUsername>${liquibase.username}</referenceUsername>
+					<referencePassword>${liquibase.password}</referencePassword>
+					<diffChangeLogFile>${liquibase.diffChangeLogFile}</diffChangeLogFile>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>update</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

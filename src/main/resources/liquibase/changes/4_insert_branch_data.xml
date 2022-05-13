@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="Insert branch sql" author="somratcste">
+        <sqlFile path="classpath:/liquibase/changes/data/2_insert_branch.sql"/>
+        <rollback>
+            delete from branch where id in (1,2,3,4);
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
